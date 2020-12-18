@@ -1,4 +1,4 @@
-(defproject lambda "0.1.0"
+(defproject lambda-cljs "0.1.0"
   :dependencies [[org.clojure/clojure "1.10.2-alpha2"]
                  [org.clojure/clojurescript "1.10.773"]
                  [org.clojure/core.match "1.0.0"]

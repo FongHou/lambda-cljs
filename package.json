@@ -1,5 +1,5 @@
 {
-  "name": "lambda",
+  "name": "lambda-cljs",
   "version": "1.0.0",
   "description": "cljs lambda",
   "main": "main.js",

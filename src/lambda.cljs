@@ -1,10 +1,9 @@
 (ns lambda
   (:require [cljsjs.console :refer [spy log]]))
 
-#ztrace
+#trace
 (defn handler [event context callback]
    (log event context)
-   #trace
     (callback
      nil
      #js{:statusCode 200
