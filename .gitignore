@@ -1,0 +1,7 @@
+.calva/
+.cpcache/
+.clj-kondo/
+.shadow-cljs/
+node_modules/
+out/
+target/

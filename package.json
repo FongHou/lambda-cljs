@@ -1,0 +1,19 @@
+{
+  "name": "lambda",
+  "version": "1.0.0",
+  "description": "cljs lambda",
+  "main": "main.js",
+  "devDependencies": {
+    "aws-sdk": "^2.812.0",
+    "shadow-cljs": "^2.11.8",
+    "websocket": "^1.0.33"
+  },
+  "scripts": {
+    "build": "shadow-cljs release :aws --debug",
+    "predeploy": "npm run build",
+    "deploy": "cd out/ && zip lambda.js",
+    "dev": "shadow-cljs watch :dev",
+    "test": "shadow-cljs watch :test",
+    "server": "shadow-cljs server"
+  }
+}
