@@ -1,7 +1,7 @@
 (ns lambda-test
   (:require [cljs.spec.alpha :as s]
             [cljs.test :refer [deftest is]]
-            [com.fulcrologic.guardrails.core :refer [>defn >def | ? =>]]))
+            [com.fulcrologic.guardrails.core :refer [>defn | ? =>]]))
 
 (s/def ::thing (s/or :i int? :s string?))
 
