@@ -10,8 +10,9 @@
 
 (def s3 (S3Client. #js{:region "us-east-1"}))
 
-(defn ^:export handler [event]
-  (log event)
+(defn ^:export handler [event context]
+  (js/console.log event)
+  (js/console.log context)
   (->
    (p/let [bucket-name "lambda-cljs"
            new-bucket (.send s3 (CreateBucketCommand. #js{:Bucket bucket-name}))
@@ -24,13 +25,12 @@
      (spy new-object)
      (println (oget objects "Contents.?0"))
      (println (oget buckets "Buckets.?0")))
-   (p/catch #(js/console.error %1)))
+   (p/catch #(js/console.log (.-stack %))))
   (p/promise #js{:message "Hello from CLJS World!"}))
 
-#_trace
 
 (comment
 
-  (handler #js{:event "Hello, World!"})
+  (handler #js{:event "Hello, World!"} #js{})
 
   'comment)

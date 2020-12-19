@@ -8,6 +8,7 @@
                    :exports          {:handler lambda/handler}
                    :compiler-options {:infer-externs      :auto
                                       :optimizations      :simple
+                                      :source-map         true
                                       :output-feature-set :es6}}
 
             :dev  {:target           :node-script
