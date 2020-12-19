@@ -7,6 +7,7 @@
                    :output-to        "out/lambda.js"
                    :exports          {:handler lambda/handler}
                    :compiler-options {:infer-externs      :auto
+                                      :optimizations      :simple
                                       :output-feature-set :es6}}
 
             :dev  {:target           :node-script

@@ -1,8 +1,9 @@
 module.exports = {
-  target: 'node',
+  target:  'node',
+  devtool: 'inline-source-map',
   entry: './out/lambda.js',
   output: {
-    libraryTarget: 'umd',
+    libraryTarget: 'commonjs',
     filename: 'index.js',
     path: __dirname + "/out",
   }
