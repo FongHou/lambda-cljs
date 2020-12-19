@@ -4,16 +4,17 @@
  :nrepl    {:port 9999}
 
  :builds   {:aws  {:target           :node-library
-                   :release          {}
                    :output-to        "out/lambda.js"
                    :exports          {:handler lambda/handler}
                    :compiler-options {:infer-externs      :auto
                                       :output-feature-set :es6}}
 
-            :dev  {:target    :node-script
-                   :output-to "out/dev.js"
-                   :main      dev/start
-                   :devtools  {:repl-pprint true}}
+            :dev  {:target           :node-script
+                   :output-to        "out/dev.js"
+                   :main             dev/start
+                   :compiler-options {:closure-defines {'goog.DEBUG true}
+                                      :external-config {:guardrails {}}}
+                   :devtools         {:repl-pprint true}}
 
             :test {:target           :node-test
                    :output-to        "out/test.js"

@@ -1,30 +1,36 @@
 (ns lambda
   (:require [cljsjs.console :refer [spy log]]
             [oops.core :refer [oget oset!]]
-            [promesa.core :as p]))
+            [promesa.core :as p]
+            ["@aws-sdk/client-s3"
+             :refer [S3Client ListBucketsCommand  ListObjectsCommand
+                     CreateBucketCommand PutObjectCommand]]))
 
-(def ^js aws (js/require "aws-sdk"))
-(def ^js s3 (new (.-S3 aws)))
-(def ^js iam (new (.-IAM aws)))
+(. (js/require "source-map-support") install)
 
-(defn handler [event context callback]
-   (log event context)
-    (callback
-     nil
-     #js{:statusCode 200
-         :body        "Hello from CLJS Lambda!"
-         :header      #js{}}))
+(def s3 (S3Client. #js{:region "us-east-1"}))
 
-(p/plet [buckets (spy (.. s3 (listBuckets #js{}) promise))
-         roles (spy (.. iam (listRoles #js{}) promise))]
-  (println (oget buckets "Buckets"))
-  (println (oget roles "Roles.?10.RoleName")))
+(defn ^:export handler [event]
+  (log event)
+  (p/promise #js{:message "Hello from CLJS World!"}))
+
+#_trace
+(->
+ (p/let [bucket-name "lambda-cljs"
+         new-bucket (.send s3 (CreateBucketCommand. #js{:Bucket bucket-name}))
+         buckets (.send s3 (ListBucketsCommand. #js{}))
+         new-object (.send s3 (PutObjectCommand. #js{:Bucket bucket-name
+                                                     :Key    "test"
+                                                     :Body   "Hello World!"}))
+         objects (.send s3 (ListObjectsCommand. #js{:Bucket bucket-name}))]
+   (spy new-bucket)
+   (spy new-object)
+   (println (oget objects "Contents.?0"))
+   (println (oget buckets "Buckets.?0")))
+ (p/catch #(js/console.error %1)))
 
 (comment
 
-  (handler #js{:event "foo"}
-           #js{:context "bar"}
-           (fn [_err result]
-             (spy result)))
+  (handler #js{:event "Hello, World!"})
 
   'comment)
