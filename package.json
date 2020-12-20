@@ -7,7 +7,8 @@
     "build": "shadow-cljs release :aws",
     "postbuild": "npx webpack",
     "predeploy": "cd out/ && zip lambda.zip index.js index.js.map",
-    "deploy": "aws lambda update-function-code --function-name hello --zip-file fileb://out/lambda.zip",
+    "deploy": "aws lambda update-function-code --function-name hello-cljs --zip-file fileb://out/lambda.zip",
+    "invoke": "time aws lambda invoke --function-name hello-cljs /dev/stderr  --log-type Tail --query 'LogResult' --output text | base64 -d",
     "dev": "shadow-cljs watch :dev",
     "test": "shadow-cljs watch :test",
     "server": "shadow-cljs server"
