@@ -9,7 +9,7 @@
                  [funcool/cuerdas "2020.03.26-3"]
                  [funcool/httpurr "2.0.0"]
                  [funcool/promesa "6.0.0"]
-                 [juji/editscript "0.4.6"]
+                 [lambdaisland/glogi "1.0.74"]
                  [medley "1.3.0"]]
 
   :source-paths ["src"])
