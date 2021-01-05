@@ -1,5 +1,6 @@
 module.exports = {
   target:  'node',
+  mode: 'production',
   entry: './out/lambda.js',
   output: {
     libraryTarget: 'commonjs',
